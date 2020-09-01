@@ -11,13 +11,13 @@ canvas = tkinter.Canvas(root, width=329, height=500, highlightthickness=0, bg='#
 canvas.place(x=0, y=0)
 
 
-def zero():
+def zero(event=None):
     '''This function calls when button_0 pressed'''
     if label['text'] != '0':
         label['text'] += '0'
 
 
-def one():
+def one(event=None):
     '''This function calls when button_1 pressed'''
     if label['text'] == '0':
         label['text'] = '1'
@@ -25,7 +25,7 @@ def one():
         label['text'] += '1'
 
 
-def two():
+def two(event=None):
     '''This function calls when button_2 pressed'''
     if label['text'] == '0':
         label['text'] = '2'
@@ -33,7 +33,7 @@ def two():
         label['text'] += '2'
 
 
-def three():
+def three(event=None):
     '''This function calls when button_3 pressed'''
     if label['text'] == '0':
         label['text'] = '3'
@@ -41,7 +41,7 @@ def three():
         label['text'] += '3'
 
 
-def four():
+def four(event=None):
     '''This function calls when button_4 pressed'''
     if label['text'] == '0':
         label['text'] = '4'
@@ -49,7 +49,7 @@ def four():
         label['text'] += '4'
 
 
-def five():
+def five(event=None):
     '''This function calls when button_5 pressed'''
     if label['text'] == '0':
         label['text'] = '5'
@@ -57,7 +57,7 @@ def five():
         label['text'] += '5'
 
 
-def six():
+def six(event=None):
     '''This function calls when button_6 pressed'''
     if label['text'] == '0':
         label['text'] = '6'
@@ -65,7 +65,7 @@ def six():
         label['text'] += '6'
 
 
-def seven():
+def seven(event=None):
     '''This function calls when button_7 pressed'''
     if label['text'] == '0':
         label['text'] = '7'
@@ -73,7 +73,7 @@ def seven():
         label['text'] += '7'
 
 
-def eight():
+def eight(event=None):
     '''This function calls when button_8 pressed'''
     if label['text'] == '0':
         label['text'] = '8'
@@ -81,7 +81,7 @@ def eight():
         label['text'] += '8'
 
 
-def nine():
+def nine(event=None):
     '''This function calls when button_9 pressed'''
     if label['text'] == '0':
         label['text'] = '9'
@@ -89,12 +89,12 @@ def nine():
         label['text'] += '9'
 
 
-def CE():
+def CE(event=None):
     '''This function calls when button_C pressed'''
     label['text'] = '0'
 
 
-def backspace():
+def backspace(event=None):
     '''This function calls when button_(<-) pressed'''
     if len(label['text']) > 1:
         if label['text'][-1] == ' ':
@@ -105,7 +105,7 @@ def backspace():
         label['text'] = '0'
 
 
-def plus_minus():
+def plus_minus(event=None):
     '''This function calls when button_(+/_) pressed'''
     if (label['text'][0] != '-') and (label['text'] != '0'):
         label['text'] = '-' + label['text']
@@ -113,42 +113,43 @@ def plus_minus():
         label['text'] = label['text'][1:]
 
 
-def plus():
+def plus(event=None):
     '''This function calls when button_+ pressed'''
     if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
         label['text'] += ' + '
 
 
-def minus():
+def minus(event=None):
     '''This function calls when button_- pressed'''
     if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
         label['text'] += ' - '
 
 
-def divide():
+def divide(event=None):
     '''This function calls when button_/ pressed'''
     if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
         label['text'] += ' / '
 
 
-def multiply():
+def multiply(event=None):
     '''This function calls when button_* pressed'''
     if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
         label['text'] += ' * '
 
 
-def dot():
+def dot(event=None):
     '''This function calls when button_. pressed'''
     if label['text'].count('.') == 0 and label['text'][-1] not in ('+', '-', '*', '/', ' '):
         label['text'] += '.'
 
 
-def equals():
+def equals(event=None):
     '''This function calls when button_= pressed'''
-    pass
+    stroka = label['text'].split()
+    print(stroka)
 
 
-def degree():
+def degree(event=None):
     '''This function calls when button_(x^2) pressed'''
     pass
 
@@ -201,7 +202,23 @@ def create_buttons():
 v = '0'
 label = tkinter.Label(text=v, bg='#1f1f1f', fg='white', font='Arial 30')
 label.place(x=10, y=10)
-
+root.bind('0', zero)
+root.bind('1', one)
+root.bind('2', two)
+root.bind('3', three)
+root.bind('4', four)
+root.bind('5', five)
+root.bind('6', six)
+root.bind('7', seven)
+root.bind('8', eight)
+root.bind('9', nine)
+root.bind('+', plus)
+root.bind('-', minus)
+root.bind('/', divide)
+root.bind('*', multiply)
+root.bind('<BackSpace>', backspace)
+root.bind('<Escape>', CE)
+root.bind('<Return>', equals)
 create_buttons()
 
 if __name__ == '__main__':
