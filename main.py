@@ -6,7 +6,7 @@ root.configure(background='black')
 root.title('Calculator')
 root.minsize(width=329, height=500)
 root.attributes('-alpha', 0.99)
-
+root.resizable(width=False, height=False)
 canvas = tkinter.Canvas(root, width=329, height=500, highlightthickness=0, bg='#1f1f1f')
 canvas.place(x=0, y=0)
 
@@ -97,7 +97,10 @@ def CE():
 def backspace():
     '''This function calls when button_(<-) pressed'''
     if len(label['text']) > 1:
-        label['text'] = label['text'][:len(label['text']) - 1]
+        if label['text'][-1] == ' ':
+            label['text'] = label['text'][:len(label['text']) - 3]
+        else:
+            label['text'] = label['text'][:len(label['text']) - 1]
     else:
         label['text'] = '0'
 
@@ -112,31 +115,31 @@ def plus_minus():
 
 def plus():
     '''This function calls when button_+ pressed'''
-    if label['text'][-1] not in ('+', '-', '*', '/', '.'):
-        label['text'] += '+'
+    if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
+        label['text'] += ' + '
 
 
 def minus():
     '''This function calls when button_- pressed'''
-    if label['text'][-1] not in ('+', '-', '*', '/', '.'):
-        label['text'] += '-'
+    if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
+        label['text'] += ' - '
 
 
 def divide():
     '''This function calls when button_/ pressed'''
-    if label['text'][-1] not in ('+', '-', '*', '/', '.'):
-        label['text'] += '/'
+    if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
+        label['text'] += ' / '
 
 
 def multiply():
     '''This function calls when button_* pressed'''
-    if label['text'][-1] not in ('+', '-', '*', '/', '.'):
-        label['text'] += '*'
+    if label['text'][-1] not in ('+', '-', '*', '/', '.', ' '):
+        label['text'] += ' * '
 
 
 def dot():
     '''This function calls when button_. pressed'''
-    if label['text'].count('.') == 0 and label['text'][-1] not in ('+', '-', '*', '/'):
+    if label['text'].count('.') == 0 and label['text'][-1] not in ('+', '-', '*', '/', ' '):
         label['text'] += '.'
 
 
