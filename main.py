@@ -139,7 +139,8 @@ def multiply(event=None):
 
 def dot(event=None):
     '''This function calls when button_. pressed'''
-    if label['text'].count('.') == 0 and label['text'][-1] not in ('+', '-', '*', '/', ' '):
+    display = label['text'].split()
+    if display[-1].count('.') == 0 and label['text'][-1] not in ('+', '-', '*', '/', ' '):
         label['text'] += '.'
 
 
