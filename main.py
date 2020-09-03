@@ -146,7 +146,7 @@ def dot(event=None):
 def equals(event=None):
     '''This function calls when button_= pressed'''
     display = label['text'].split()
-    if display[-1] in ('*', '+', '-', '-'):
+    if display[-1] in ('*', '+', '-', '/'):
         display.append(display[-2])
     while len(display) > 1:
         if '*' in display:
@@ -180,7 +180,9 @@ def result(display, index):
 
 def degree(event=None):
     '''This function calls when button_(x^2) pressed'''
-    pass
+    equals()
+    display = label['text'].split()
+    label['text'] = str(pow(float(display[0]), 2))
 
 
 # This function displays buttons
