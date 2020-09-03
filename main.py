@@ -162,7 +162,13 @@ def equals(event=None):
         elif '-' in display:
             index = display.index('-')
             result(display, index)
-    label['text'] = str(display[0])
+    try:
+        if int(display[0]) == float(display[0]):
+            label['text'] = str(int(display[0]))
+        else:
+            label['text'] = str(display[0])
+    except ValueError:
+        pass
 
 
 def result(display, index):
@@ -170,7 +176,7 @@ def result(display, index):
     if '*' == display[index]:
         total = float(display[index - 1]) * float(display[index + 1])
     elif '/' in display[index]:
-        total = float(display[index - 1]) / float(display[index + 1])
+        total = float('%.3f' % (float(display[index - 1]) / float(display[index + 1])))
     elif '+' in display[index]:
         total = float(display[index - 1]) + float(display[index + 1])
     elif '-' in display[index]:
