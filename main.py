@@ -1,7 +1,7 @@
 import tkinter
 
+# set up window
 root = tkinter.Tk()
-
 root.configure(background='black')
 root.title('Calculator')
 root.minsize(width=329, height=500)
@@ -145,8 +145,37 @@ def dot(event=None):
 
 def equals(event=None):
     '''This function calls when button_= pressed'''
-    stroka = label['text'].split()
-    print(stroka)
+    display = label['text'].split()
+    if display[-1] in ('*', '+', '-', '-'):
+        display.append(display[-2])
+    while len(display) > 1:
+        if '*' in display:
+            index = display.index('*')
+            result(display, index)
+        elif '/' in display:
+            index = display.index('/')
+            result(display, index)
+        elif '+' in display:
+            index = display.index('+')
+            result(display, index)
+        elif '-' in display:
+            index = display.index('-')
+            result(display, index)
+    label['text'] = str(display[0])
+
+
+def result(display, index):
+    total = 0
+    if '*' == display[index]:
+        total = float(display[index - 1]) * float(display[index + 1])
+    elif '/' in display[index]:
+        total = float(display[index - 1]) / float(display[index + 1])
+    elif '+' in display[index]:
+        total = float(display[index - 1]) + float(display[index + 1])
+    elif '-' in display[index]:
+        total = float(display[index - 1]) - float(display[index + 1])
+    display.pop(index - 1), display.pop(index - 1), display.pop(index - 1)
+    display.insert(index - 1, total)
 
 
 def degree(event=None):
@@ -154,6 +183,7 @@ def degree(event=None):
     pass
 
 
+# This function displays buttons
 def create_buttons():
     '''Painting buttons'''
     dict = {
@@ -199,9 +229,11 @@ def create_buttons():
     button.place(x=5 + 160, y=450 - 192)
 
 
-v = '0'
+v = '0'  # variable to display text
 label = tkinter.Label(text=v, bg='#1f1f1f', fg='white', font='Arial 30')
 label.place(x=10, y=10)
+
+# when button are pressed, the function is called
 root.bind('0', zero)
 root.bind('1', one)
 root.bind('2', two)
@@ -219,6 +251,8 @@ root.bind('*', multiply)
 root.bind('<BackSpace>', backspace)
 root.bind('<Escape>', CE)
 root.bind('<Return>', equals)
+
+#
 create_buttons()
 
 if __name__ == '__main__':
